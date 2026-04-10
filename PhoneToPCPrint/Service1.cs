@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceProcess;
 
 namespace PhoneToPCPrint
 {
     public partial class Service1 : ServiceBase
     {
+        private ServerHost _host;
+
         public Service1()
         {
             InitializeComponent();
@@ -19,10 +13,13 @@ namespace PhoneToPCPrint
 
         protected override void OnStart(string[] args)
         {
+            _host = new ServerHost();
+            _host.Start();
         }
 
         protected override void OnStop()
         {
+            _host?.Stop();
         }
     }
 }
